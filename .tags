@@ -1,0 +1,13 @@
+colorArray	/Users/scalixte/Developments/git/MediChat/MediChat-Users/utilities.go	/^func colorArray() [50]string {$/;"	func	line:7
+randomColor	/Users/scalixte/Developments/git/MediChat/MediChat-Users/utilities.go	/^func randomColor() string {$/;"	func	line:20
+UserAuth	/Users/scalixte/Developments/git/MediChat/MediChat-Users/userAuths.go	/^type UserAuth struct {$/;"	type	line:10
+createUserAuthTable	/Users/scalixte/Developments/git/MediChat/MediChat-Users/userAuths.go	/^func createUserAuthTable(db *gorm.DB) {$/;"	func	line:19
+dropUserAuthTable	/Users/scalixte/Developments/git/MediChat/MediChat-Users/userAuths.go	/^func dropUserAuthTable(db *gorm.DB) {$/;"	func	line:28
+UserPref	/Users/scalixte/Developments/git/MediChat/MediChat-Users/userPrefs.go	/^type UserPref struct {$/;"	type	line:8
+createUserPrefsTable	/Users/scalixte/Developments/git/MediChat/MediChat-Users/userPrefs.go	/^func createUserPrefsTable(db *gorm.DB) {$/;"	func	line:17
+dropUserPrefsTable	/Users/scalixte/Developments/git/MediChat/MediChat-Users/userPrefs.go	/^func dropUserPrefsTable(db *gorm.DB) {$/;"	func	line:26
+main	/Users/scalixte/Developments/git/MediChat/MediChat-Users/main.go	/^func main() {$/;"	func	line:8
+User	/Users/scalixte/Developments/git/MediChat/MediChat-Users/users.go	/^type User struct {$/;"	type	line:10
+createUserTable	/Users/scalixte/Developments/git/MediChat/MediChat-Users/users.go	/^func createUserTable(db *gorm.DB) {$/;"	func	line:18
+dropUserTable	/Users/scalixte/Developments/git/MediChat/MediChat-Users/users.go	/^func dropUserTable(db *gorm.DB) {$/;"	func	line:28
+Channel	/Users/scalixte/Developments/git/MediChat/MediChat-Users/channels.go	/^type Channel struct {$/;"	type	line:10
