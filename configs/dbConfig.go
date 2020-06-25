@@ -1,11 +1,10 @@
-package main
+package configs
 
 import (
   "fmt"
   "os"
   "log"
   "gopkg.in/yaml.v2"
-  // "database/sql"
   "github.com/jinzhu/gorm"
     _ "github.com/jinzhu/gorm/dialects/postgres"
 )
@@ -41,6 +40,7 @@ func ValidateConfigPath(path string) error {
 
 func LoadDatabaseConfig() (*Config, error){
   var configPath string = "configs/database.yml"
+  // var configPath string = "database.yml"
   config := &Config{}
   if err := ValidateConfigPath(configPath); err != nil {
     return nil, err

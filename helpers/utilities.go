@@ -1,4 +1,4 @@
-package main
+package helpers
 
 import (
   "time"
@@ -22,3 +22,12 @@ func randomColor() string {
   rand.Seed(time.Now().UnixNano())
 	return array[rand.Intn(len(array))]
 }
+//
+// func createDatabase(db) {
+//   if(!db.HasTable(&User{})){ createUserTable(db) }
+//   if(!db.HasTable(&Channel{})) {
+//     createChannelTable(db)
+//     if(!db.HasTable(&UserChannel{})){ createUserChannelTable(db) }
+//   }
+// 
+// }

@@ -1,7 +1,7 @@
-package main
+package models
 
 import (
-	"log"
+	// "log"
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
@@ -9,27 +9,72 @@ import (
 
 type User struct {
 	gorm.Model
-	Firstname string
-	Lastname  string
-	Username  string `gorm:"type:varchar(100);unique_index"`
-	Email     string `gorm:"type:varchar(100);unique_index"`
+	Firstname string `json:"Firstname";valid:"required"`
+	Lastname  string `json:"Lastname";valid:"required"`
+	Username  string `json:"Username";gorm:"type:varchar(100);valid:"required";unique_index"`
+	Email     string `json:"Email";gorm:"type:varchar(100);email:"required";unique_index"`
 }
 
-func createUserTable(db *gorm.DB) {
-	log.Printf("Unable to connect to database with error: %v", db.DB())
+type CreateUserModel struct {
+  Firstname 	string `json:"Firstname" binding:"required"`
+  Lastname 		string 	`json:"Lastname" binding:"required"`
+	Username 		string 	`json:"Username" binding:"required"`
+	Email 			string 	`json:"Lastname" binding:"required" email:"required"`
+	Password 		string 	`json:"Password" binding:"required" password:"required"`
+}
+
+func CreateUserTable() {
 	// Create table for model `User`
-	db.CreateTable(&User{})
-
-	// create related table
-	createUserAuthTable(db)
-	createUserPrefsTable(db)
+	DB.CreateTable(&User{})
 }
 
-func dropUserTable(db *gorm.DB) {
+func DropUserTable() {
 	// Drop model `User`'s table
-	db.DropTable(&User{})
+	DB.DropTable(&User{})
 
-	// // drop related tables
-	dropUserAuthTable(db)
-	dropUserPrefsTable(db)
+	// drop related tables
+	DropUserAuthTable()
+	DropUserPrefsTable()
 }
+
+func CreateFirstUsers() {
+	user1 := User{Firstname: "Jinzhu", Lastname: "Boo", Username: "sboo", Email: "sboo@example.com"}
+	DB.NewRecord(user1) // => returns `true` as primary key is blank
+	DB.Create(&user1)
+
+	user2 := User{Firstname: "Jinzhu", Lastname: "Moo", Username: "smoo", Email: "smoo@example.com"}
+	DB.NewRecord(user2) // => returns `true` as primary key is blank
+	DB.Create(&user2)
+}
+
+func GetUsers() ([]*User, int, error) {
+	var users []*User
+	err := DB.Find(&users).Error
+	if err != nil && err != gorm.ErrRecordNotFound {
+		return nil, 0, err
+	}
+
+	var total int
+	DB.Model(&users).Count(&total)
+
+	return users, total, nil
+}
+
+func GetUser(id int) (User, error) {
+	var user User
+	if err := DB.Where("id = ?", id).First(&user).Error; err != nil {
+    return User{}, err
+  }
+
+	return user, nil
+}
+
+// func GetUsers(pageNum int, pageSize int, maps interface{}) ([]*User, error) {
+// 	var users []*User
+// 	err := DB.Where(maps).Offset(pageNum).Limit(pageSize).Find(&users).Error
+// 	if err != nil && err != gorm.ErrRecordNotFound {
+// 		return nil, err
+// 	}
+//
+// 	return users, nil
+// }

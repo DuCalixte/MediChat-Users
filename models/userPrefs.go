@@ -1,4 +1,4 @@
-package main
+package models
 
 import (
 	"github.com/jinzhu/gorm"
@@ -7,23 +7,43 @@ import (
 
 type UserPref struct {
 	gorm.Model
-	UserId  string
+	UserId  string `gorm:"primary_key";valid:"required"`
 	Avatar  string
-	Color   string
+	Color   string `valid:"required"`
 	AboutMe string `gorm:"type:varchar(500);unique_index"`
-	isLocal bool   `gorm:"default:true"`
+	IsLocal bool   `gorm:"default:true"`
 }
 
-func createUserPrefsTable(db *gorm.DB) {
+type CreateUserPrefModel struct {
+  UserId 		string	`json:"UserId" binding:"required"`
+  Avatar 		string 	`json:"Avatar" binding:"required"`
+	AboutMe 	string 	`json:"AboutMe" binding:"required"`
+	IsLocal 	string 	`json:"IsLocal" binding:"required"`
+}
+
+func CreateUserPrefsTable() {
 	// Create table for model `User`
-	db.CreateTable(&UserPref{})
-
-	// userPref := UserPref{UserId: "1", Avatar: "Jinzhu", AboutMe: "sce", Color: randomColor() }
-	// db.NewRecord(userPref) // => returns `true` as primary key is blank
-	// db.Create(&userPref)
+	DB.CreateTable(&UserPref{})
 }
 
-func dropUserPrefsTable(db *gorm.DB) {
+func DropUserPrefsTable() {
 	// Drop model `User`'s table
-	db.DropTable(&UserPref{})
+	DB.DropTable(&UserPref{})
+}
+
+func GetUserPref(userId int) (UserPref, error) {
+	var userPref UserPref
+	if err := DB.Where("UserId = ?", userId).First(&userPref).Error; err != nil {
+    return UserPref{}, err
+  }
+
+	return userPref, nil
+}
+
+func CreateUserPref(userId int) (UserPref, error) {
+	return UserPref{}, nil
+}
+
+func UpdateUserPref(userId int) (UserPref, error) {
+	return UserPref{}, nil
 }
