@@ -17,7 +17,8 @@
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
-tmp /
+tmp/
+/tmp/*
 
 configs/database.yml
 configs/server.yml
