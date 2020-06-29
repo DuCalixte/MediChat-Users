@@ -4,4 +4,8 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
-Channel	/Users/scalixte/Developments/git/MediChat/MediChat-Users/channels.go	/^type Channel struct {$/;"	type	line:10
+UserChannel	/Users/scalixte/Developments/git/MediChat/MediChat-Users/models/userChannels.go	/^type UserChannel struct {$/;"	type	line:9
+CreateUserChannelTable	/Users/scalixte/Developments/git/MediChat/MediChat-Users/models/userChannels.go	/^func CreateUserChannelTable() {$/;"	func	line:16
+DropUserChannelTable	/Users/scalixte/Developments/git/MediChat/MediChat-Users/models/userChannels.go	/^func DropUserChannelTable() {$/;"	func	line:21
+ChannelListUser	/Users/scalixte/Developments/git/MediChat/MediChat-Users/models/userChannels.go	/^func ChannelListUser(userId uint) []*Channel {$/;"	func	line:26
+UserListChannel	/Users/scalixte/Developments/git/MediChat/MediChat-Users/models/userChannels.go	/^func UserListChannel(channelId uint)[]*User {$/;"	func	line:34

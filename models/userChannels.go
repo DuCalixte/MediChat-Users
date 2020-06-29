@@ -1,8 +1,7 @@
 package models
 
 import (
-  // "log"
-
+// "log"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 )
@@ -11,19 +10,31 @@ type UserChannel struct {
 	gorm.Model
 	UserId      string `gorm:"primary_key"`
 	ChannelId   string `gorm:"primary_key"`
-	IsActive     bool `gorm:"default:true"`
+	IsActive    bool `gorm:"default:true"`
 }
 
-func CreateUserChannelsTable() {
+func CreateUserChannelTable() {
 	// Create table for model `User`
-	DB.CreateTable(&UserPref{})
+	DB.CreateTable(&UserChannel{})
 }
 
-func DropUserChannelsTable() {
+func DropUserChannelTable() {
 	// Drop model `User`'s table
-	DB.DropTable(&UserPref{})
+	DB.DropTable(&UserChannel{})
 }
 
-func ChannelList(userId int)([]Channel, error) {
-	return []Channel{}, nil
+func ChannelListUser(userId uint) []*Channel {
+	channels := []*Channel{}
+	query := "Select * from channels inner join user_channels on channels.id = user_channels.channel_id where user_channels.user_id = ?"
+
+	DB.Raw(query, userId).Scan(&channels)
+	return channels
+}
+
+func UserListChannel(channelId uint)[]*User {
+	users := []*User{}
+	query := "Select * from users inner join user_channels on users.id = user_channels.user_id where user_channels.channel_id = ?"
+
+	DB.Raw(query, channelId).Scan(&users)
+	return users
 }

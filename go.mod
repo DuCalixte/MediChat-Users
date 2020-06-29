@@ -5,6 +5,7 @@ go 1.14
 require (
 	github.com/astaxie/beego v1.12.1 // indirect
 	github.com/chilts/sid v0.0.0-20190607042430-660e94789ec9
+	github.com/gin-contrib/cors v1.3.1
 	github.com/gin-gonic/gin v1.6.3
 	github.com/go-delve/delve v1.4.1 // indirect
 	github.com/google/uuid v1.1.1
@@ -17,9 +18,11 @@ require (
 	github.com/satori/go.uuid v1.2.0
 	github.com/segmentio/ksuid v1.0.2
 	github.com/sony/sonyflake v1.0.0
-	github.com/swaggo/gin-swagger v1.2.0 // indirect
+	github.com/swaggo/files v0.0.0-20190704085106-630677cd5c14 // indirect
+	github.com/swaggo/gin-swagger v1.2.0
 	github.com/tsenart/deadcode v0.0.0-20160724212837-210d2dc333e9 // indirect
 	github.com/unknwon/com v1.0.1
+	golang.org/x/crypto v0.0.0-20191205180655-e7c4368fe9dd
 	gopkg.in/yaml.v2 v2.2.8
 	mvdan.cc/unparam v0.0.0-20200501210554-b37ab49443f7 // indirect
 )

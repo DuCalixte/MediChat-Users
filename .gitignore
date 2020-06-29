@@ -22,3 +22,4 @@ tmp /
 configs/database.yml
 configs/server.yml
 configs/redis.yml
+configs/encrypt.yml

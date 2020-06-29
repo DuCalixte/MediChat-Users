@@ -17,7 +17,7 @@ func colorArray() [50]string {
 		"#E64D66", "#4DB380", "#FF4D4D", "#99E6E6", "#6666FF"}
 }
 
-func randomColor() string {
+func RandomColor() string {
   array := colorArray()
   rand.Seed(time.Now().UnixNano())
 	return array[rand.Intn(len(array))]
@@ -29,5 +29,5 @@ func randomColor() string {
 //     createChannelTable(db)
 //     if(!db.HasTable(&UserChannel{})){ createUserChannelTable(db) }
 //   }
-// 
+//
 // }

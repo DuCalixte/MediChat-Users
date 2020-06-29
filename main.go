@@ -18,7 +18,7 @@ import (
 
 func InitApp() {
   InitDatabase()
-  // InitWebServer()
+  InitWebServer()
 }
 
 func InitDatabase() {

@@ -9,7 +9,7 @@ import (
     _ "github.com/jinzhu/gorm/dialects/postgres"
 )
 
-type Config struct {
+type DatabaseConfig struct {
   Database struct {
     Host      string  `yaml:"host"`
     Port      string  `yaml:"port"`
@@ -26,22 +26,22 @@ type Config struct {
 
 // ValidateConfigPath just makes sure, that the path provided is a file,
 // that can be read
-func ValidateConfigPath(path string) error {
-    s, err := os.Stat(path)
-    if err != nil {
-        return err
-    }
-    if s.IsDir() {
-        return fmt.Errorf("'%s' is a directory, not a normal file", path)
-    }
-    return nil
-}
+// func ValidateConfigPath(path string) error {
+//     s, err := os.Stat(path)
+//     if err != nil {
+//         return err
+//     }
+//     if s.IsDir() {
+//         return fmt.Errorf("'%s' is a directory, not a normal file", path)
+//     }
+//     return nil
+// }
 
 
-func LoadDatabaseConfig() (*Config, error){
+func LoadDatabaseConfig() (*DatabaseConfig, error) {
   var configPath string = "configs/database.yml"
   // var configPath string = "database.yml"
-  config := &Config{}
+  config := &DatabaseConfig{}
   if err := ValidateConfigPath(configPath); err != nil {
     return nil, err
   }

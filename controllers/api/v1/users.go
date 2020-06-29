@@ -11,14 +11,14 @@ import (
 
 func GetUser(c *gin.Context) {
   id := com.StrTo(c.Param("id")).MustInt()
-  // log.Printf(c)
 
   user, err := models.GetUser(id)
   if err != nil {
-		// c.JSON(http.StatusInternalServerError, gin.H{"status": http.StatusInternalServerError, "error": err, "data": nil})
     c.JSON(http.StatusBadRequest, gin.H{"status": http.StatusNotFound, "error": "Record not found!"})
     return
 	}
+  channels := models.ChannelListUser(user.ID)
+  user.Channels = channels
   c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "data": user})
 }
 
@@ -30,12 +30,10 @@ func GetUsers(c *gin.Context) {
   }
 
   if err != nil {
-		// c.JSON(http.StatusInternalServerError, gin.H{"status": http.StatusInternalServerError, "error": err, "data": nil})
     c.JSON(http.StatusBadRequest, gin.H{"status": http.StatusNotFound, "error": err})
     return
 	}
 
-  // total := users(&count)
   data := make(map[string]interface{})
 	data["lists"] = users
 	data["total"] = total
