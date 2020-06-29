@@ -1,3 +1,13 @@
+// @title MediChat API
+// @version 1.0
+// @description A chat service api with websocket.
+// @termsOfService http://swagger.io/terms/
+
+// @contact.name MediChat API Support
+// @contact.email ducalixte.@gmail.com
+
+// @license.name MIT
+// @license.url https://github.com/DuCalixte/MediChat-Users/blob/master/LICENSE
 package main
 
 import (
@@ -5,6 +15,8 @@ import (
   "log"
   "time"
   "net/http"
+  // "github.com/swaggo/gin-swagger"
+  _ "github.com/swaggo/gin-swagger/example/basic/docs"
   // "github.com/DuCalixte/MediChat-Users/helpers"
   "github.com/DuCalixte/MediChat-Users/models"
     // _ "github.com/DuCalixte/MediChat-Users/models/users"
@@ -48,8 +60,6 @@ func InitWebServer() {
 	log.Printf("[info] start http server listening %s", endPoint)
 
 	server.ListenAndServe()
-
-  // configs.SayHello()
 }
 
 func main() {

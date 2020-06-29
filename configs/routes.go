@@ -9,7 +9,6 @@ import (
   "github.com/swaggo/gin-swagger"
   "github.com/swaggo/gin-swagger/swaggerFiles"
 
-  // "github.com/DuCalixte/MediChat-Users/controllers/api/v1"
   "github.com/DuCalixte/MediChat-Users/controllers/api"
   "github.com/DuCalixte/MediChat-Users/controllers/api/v1"
 
@@ -26,6 +25,8 @@ func InitRoutes() *gin.Engine {
 
   route.POST("/signin", api.Authenticate)
   route.POST("/signup", api.Authorize)
+  // url := ginSwagger.URL("http://localhost:8001/swagger/swagger.json") // The url pointing to API definition
+	// route.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, url))
 	route.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 // TODO Use JWT

@@ -1,0 +1,124 @@
+definitions:
+  models.Channel:
+    properties:
+      description:
+        type: string
+      isAChatBot:
+        type: boolean
+      isPrivate:
+        type: boolean
+      name:
+        type: string
+      ownerId:
+        type: integer
+      users:
+        items:
+          $ref: '#/definitions/models.User'
+        type: array
+      websocket:
+        type: string
+    type: object
+  models.User:
+    properties:
+      channels:
+        items:
+          $ref: '#/definitions/models.Channel'
+        type: array
+      email:
+        type: string
+      firstname:
+        type: string
+      lastname:
+        type: string
+      profile:
+        $ref: '#/definitions/models.UserPref'
+        type: object
+      username:
+        type: string
+    type: object
+  models.UserPref:
+    properties:
+      aboutMe:
+        type: string
+      color:
+        type: string
+      gravatar:
+        type: string
+      isLocal:
+        type: boolean
+      userId:
+        type: integer
+    type: object
+info:
+  contact:
+    email: ducalixte.@gmail.com
+    name: MediChat API Support
+  description: A chat service api with websocket.
+  license:
+    name: MIT
+    url: https://github.com/DuCalixte/MediChat-Users/blob/master/LICENSE
+  termsOfService: http://swagger.io/terms/
+  title: MediChat API
+  version: "1.0"
+paths:
+  /api/v1/channels:
+    get:
+      consumes:
+      - application/json
+      description: get channels
+      parameters:
+      - description: name search by q
+        in: query
+        name: q
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          headers:
+            Token:
+              description: qwerty
+              type: string
+          schema:
+            items:
+              $ref: '#/definitions/models.Channel'
+            type: array
+      summary: List channels
+    post:
+      description: create a new channel
+      responses:
+        "200":
+          description: OK
+          headers:
+            Token:
+              description: qwerty
+              type: object
+          schema:
+            $ref: '#/definitions/models.Channel'
+      summary: Create channel
+  /api/v1/channels/{id}:
+    get:
+      consumes:
+      - application/json
+      description: get string by ID
+      operationId: get-string-by-int
+      parameters:
+      - description: Channel ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          headers:
+            Token:
+              description: qwerty
+              type: string
+          schema:
+            $ref: '#/definitions/models.Channel'
+      summary: Show information on specific channel
+swagger: "2.0"

@@ -4,8 +4,8 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
-UserChannel	/Users/scalixte/Developments/git/MediChat/MediChat-Users/models/userChannels.go	/^type UserChannel struct {$/;"	type	line:9
-CreateUserChannelTable	/Users/scalixte/Developments/git/MediChat/MediChat-Users/models/userChannels.go	/^func CreateUserChannelTable() {$/;"	func	line:16
-DropUserChannelTable	/Users/scalixte/Developments/git/MediChat/MediChat-Users/models/userChannels.go	/^func DropUserChannelTable() {$/;"	func	line:21
-ChannelListUser	/Users/scalixte/Developments/git/MediChat/MediChat-Users/models/userChannels.go	/^func ChannelListUser(userId uint) []*Channel {$/;"	func	line:26
-UserListChannel	/Users/scalixte/Developments/git/MediChat/MediChat-Users/models/userChannels.go	/^func UserListChannel(channelId uint)[]*User {$/;"	func	line:34
+GetChannel	/Users/scalixte/Developments/git/MediChat/MediChat-Users/controllers/api/v1/channels.go	/^func GetChannel(c *gin.Context) {$/;"	func	line:23
+GetChannels	/Users/scalixte/Developments/git/MediChat/MediChat-Users/controllers/api/v1/channels.go	/^func GetChannels(c *gin.Context) {$/;"	func	line:47
+CreateChannel	/Users/scalixte/Developments/git/MediChat/MediChat-Users/controllers/api/v1/channels.go	/^func CreateChannel(c *gin.Context) {$/;"	func	line:77
+UpdateChannel	/Users/scalixte/Developments/git/MediChat/MediChat-Users/controllers/api/v1/channels.go	/^func UpdateChannel(c *gin.Context) {$/;"	func	line:92
+DeleteChannel	/Users/scalixte/Developments/git/MediChat/MediChat-Users/controllers/api/v1/channels.go	/^func DeleteChannel(c *gin.Context) {$/;"	func	line:104

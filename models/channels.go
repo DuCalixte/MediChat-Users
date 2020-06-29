@@ -28,17 +28,13 @@ func DropChannelTable() {
 	DB.DropTable(&Channel{})
 }
 
-func GetChannels() ([]*Channel, int, error) {
-	var channels []*Channel
-	err := DB.Find(&channels).Error
-	if err != nil && err != gorm.ErrRecordNotFound {
-		return nil, 0, err
-	}
+func GetChannel(id int)(Channel, error) {
+	var channel Channel
+	if err := DB.Where("id = ?", id).First(&channel).Error; err != nil {
+    return Channel{}, err
+  }
 
-	var total int
-	DB.Model(&channels).Count(&total)
-
-	return channels, total, nil
+	return channel, nil
 }
 
 func GetChannelGallery() (Channel, error) {
@@ -50,13 +46,17 @@ func GetChannelGallery() (Channel, error) {
 	return channel, nil
 }
 
-func GetChannel(id int)(Channel, error) {
-	var channel Channel
-	if err := DB.Where("id = ?", id).First(&channel).Error; err != nil {
-    return Channel{}, err
-  }
+func GetChannels() ([]*Channel, int, error) {
+	var channels []*Channel
+	err := DB.Find(&channels).Error
+	if err != nil && err != gorm.ErrRecordNotFound {
+		return nil, 0, err
+	}
 
-	return channel, nil
+	var total int
+	DB.Model(&channels).Count(&total)
+
+	return channels, total, nil
 }
 
 func CreateChannel(user User, name string, description string, isPrivate bool)(Channel, error) {
