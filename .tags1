@@ -4,8 +4,6 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
-GetChannel	/Users/scalixte/Developments/git/MediChat/MediChat-Users/controllers/api/v1/channels.go	/^func GetChannel(c *gin.Context) {$/;"	func	line:23
-GetChannels	/Users/scalixte/Developments/git/MediChat/MediChat-Users/controllers/api/v1/channels.go	/^func GetChannels(c *gin.Context) {$/;"	func	line:47
-CreateChannel	/Users/scalixte/Developments/git/MediChat/MediChat-Users/controllers/api/v1/channels.go	/^func CreateChannel(c *gin.Context) {$/;"	func	line:77
-UpdateChannel	/Users/scalixte/Developments/git/MediChat/MediChat-Users/controllers/api/v1/channels.go	/^func UpdateChannel(c *gin.Context) {$/;"	func	line:92
-DeleteChannel	/Users/scalixte/Developments/git/MediChat/MediChat-Users/controllers/api/v1/channels.go	/^func DeleteChannel(c *gin.Context) {$/;"	func	line:104
+Message	/Users/scalixte/Developments/git/MediChat/MediChat-Users/helpers/socketHelper.go	/^type Message struct {$/;"	type	line:9
+socketUpgrader	/Users/scalixte/Developments/git/MediChat/MediChat-Users/helpers/socketHelper.go	/^var socketUpgrader = websocket.Upgrader{$/;"	var	line:16
+HandleIncoming	/Users/scalixte/Developments/git/MediChat/MediChat-Users/helpers/socketHelper.go	/^func HandleIncoming(w http.ResponseWriter, r *http.Request, isChatBot bool) {$/;"	func	line:24

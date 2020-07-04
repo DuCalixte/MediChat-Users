@@ -28,5 +28,14 @@ func Authorize(c *gin.Context) {
 
   models.CreateUserAuth(user, hash, salt)
 
-  c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "data": user})
+  authToken, err := helpers.GenerateToken(user.Email, password)
+  if err != nil {
+    c.JSON(http.StatusUnauthorized, gin.H{"status": http.StatusUnauthorized, "error": "Unable generate an auth token!"})
+    return
+  }
+
+  // TODO - DRY VIOLATION
+  channels := models.ChannelListUser(user.ID)
+  user.Channels = channels
+  c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "data": user, "authToken": authToken})
 }

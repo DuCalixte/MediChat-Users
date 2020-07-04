@@ -85,10 +85,13 @@ func CreateChannel(c *gin.Context) {
 // @Accept  json
 // @Produce  json
 // @Param  id path int true "Channel ID"
-// @Param  channel body models.UpdateChannel true "Update channel"
+// parameters:
+//  - in: body
+//    required: true
+//    schema:
+//       $ref: "#/definitions/UpdateChannelRequest"
 // @Success 200 {object} models.Channel
 // @Router /api/v1/channels/{id} [put]
-
 func UpdateChannel(c *gin.Context) {
   c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "data": 5})
 }
@@ -100,7 +103,7 @@ func UpdateChannel(c *gin.Context) {
 // @Accept  json
 // @Produce  json
 // @Param  id path int true "Channel ID" Format(int64)
-// @Success 204 {object} modesl.Channel
+// @Success 204 {object} models.Channel
 func DeleteChannel(c *gin.Context) {
   c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "data": 0})
 }

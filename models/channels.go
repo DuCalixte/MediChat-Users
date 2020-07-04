@@ -13,8 +13,8 @@ type Channel struct {
 	Name         string		`json:"name" gorm:"type:varchar(100)"`
 	Description  string 	`json:"description" gorm:"type:varchar(512)"`
 	IsPrivate    bool   	`json:"isPrivate" gorm:"default:true"`
-	IsAChatBot	 bool			`json:"isAChatBot" gorm:"default:false"`
-	WebSocket		 string		`json:"websocket"  gorm:"type:varchar(256)"`
+	IsAChatBot	 bool			`json:"chatBot" gorm:"default:false"`
+	// WebSocket		 string		`json:"websocket"  gorm:"type:varchar(256)"`
 	Users				[]*User		`json:"users" gorm:"PRELOAD:true;many2many:user_channels;"`
 }
 
@@ -30,6 +30,7 @@ func DropChannelTable() {
 
 func GetChannel(id int)(Channel, error) {
 	var channel Channel
+	// if err := DB.Preload("User").Preload("UserPref").Where("id = ?", id).First(&channel).Error; err != nil {
 	if err := DB.Where("id = ?", id).First(&channel).Error; err != nil {
     return Channel{}, err
   }

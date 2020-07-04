@@ -7,13 +7,15 @@ require (
 	github.com/astaxie/beego v1.12.1 // indirect
 	github.com/chilts/sid v0.0.0-20190607042430-660e94789ec9
 	github.com/cpuguy83/go-md2man/v2 v2.0.0 // indirect
+	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/gin-contrib/cors v1.3.1
 	github.com/gin-gonic/gin v1.6.3
 	github.com/go-delve/delve v1.4.1 // indirect
+	github.com/go-ini/ini v1.57.0
 	github.com/go-openapi/spec v0.19.8 // indirect
 	github.com/go-openapi/swag v0.19.9 // indirect
 	github.com/google/uuid v1.1.1
-	github.com/gorilla/websocket v1.4.2 // indirect
+	github.com/gorilla/websocket v1.4.2
 	github.com/jinzhu/gorm v1.9.14
 	github.com/kjk/betterguid v0.0.0-20170621091430-c442874ba63a
 	github.com/lithammer/shortuuid v3.0.0+incompatible

@@ -2,20 +2,34 @@ package models
 
 import (
 	"log"
+	"fmt"
 	// "reflect"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
+
+	"github.com/DuCalixte/MediChat-Users/settings"
 )
 
 var DB *gorm.DB
 
-func Init(database *gorm.DB) {
-	DB = database
+func Init() {
+	uri := fmt.Sprintf("host=%s port=%s user=%s dbname=%s password=%q sslmode=%s",
+		settings.DatabaseSetting.Host,
+		settings.DatabaseSetting.Port,
+		settings.DatabaseSetting.User,
+		settings.DatabaseSetting.Name,
+		settings.DatabaseSetting.Password,
+		settings.DatabaseSetting.Sslmode)
 
-	if(DB == nil) {
-		log.Printf("A database should be provided")
-		return
-	}
+	var err error
+	DB, err = gorm.Open("postgres", uri)
+	if(err != nil) {
+    log.Fatalf("Unable able to access database due to %v", err)
+    return
+  }
+}
+
+func InitializeTable() {
 
 	if(!DB.HasTable(&User{})){ CreateUserTable() }
   DB.AutoMigrate(&User{})
@@ -46,6 +60,14 @@ func Init(database *gorm.DB) {
 	DB.Model(&User{}).Count(&userCount)
 	if (userCount == 0) { CreateFirstUsers() }
 
+}
+
+func DropDBTables() {
+	if(DB.HasTable(&User{})){ DB.DropTable(&User{}) }
+	if(DB.HasTable(&UserPref{})){ DB.DropTable(&UserPref{}) }
+	if(DB.HasTable(&UserAuth{})){ DB.DropTable(&UserAuth{}) }
+	if(DB.HasTable(&Channel{})){ DB.DropTable(&Channel{}) }
+	if(DB.HasTable(&UserChannel{})){ DB.DropTable(&UserChannel{}) }
 }
 
 func CloseDB() {

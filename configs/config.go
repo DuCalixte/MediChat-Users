@@ -4,6 +4,8 @@ import (
   "fmt"
   "os"
   "gopkg.in/yaml.v2"
+
+  "github.com/DuCalixte/MediChat-Users/settings"
 )
 
 // ValidateConfigPath just makes sure, that the path provided is a file,
@@ -44,3 +46,7 @@ func CloseFile(file *os.File) {
 }
 //
 // func DecodeFile(file)
+
+func InitSettings() {
+  settings.InitSettings()
+}

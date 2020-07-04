@@ -16,6 +16,25 @@ DropUserChannelTable	/Users/scalixte/Developments/git/MediChat/MediChat-Users/mo
 ChannelListUser	/Users/scalixte/Developments/git/MediChat/MediChat-Users/models/userChannels.go	/^func ChannelListUser(userId uint) []*Channel {$/;"	func	line:26
 UserListChannel	/Users/scalixte/Developments/git/MediChat/MediChat-Users/models/userChannels.go	/^func UserListChannel(channelId uint)[]*User {$/;"	func	line:34
 InitSwagger	/Users/scalixte/Developments/git/MediChat/MediChat-Users/configs/swaggerConfig.go	/^func InitSwagger() {$/;"	func	line:8
+InitApp	/Users/scalixte/Developments/git/MediChat/MediChat-Users/main.go	/^func InitApp() {$/;"	func	line:31
+InitDatabase	/Users/scalixte/Developments/git/MediChat/MediChat-Users/main.go	/^func InitDatabase() {$/;"	func	line:36
+InitWebServer	/Users/scalixte/Developments/git/MediChat/MediChat-Users/main.go	/^func InitWebServer() {$/;"	func	line:45
+main	/Users/scalixte/Developments/git/MediChat/MediChat-Users/main.go	/^func main() {$/;"	func	line:65
+GetChannel	/Users/scalixte/Developments/git/MediChat/MediChat-Users/controllers/api/v1/channels.go	/^func GetChannel(c *gin.Context) {$/;"	func	line:23
+GetChannels	/Users/scalixte/Developments/git/MediChat/MediChat-Users/controllers/api/v1/channels.go	/^func GetChannels(c *gin.Context) {$/;"	func	line:47
+CreateChannel	/Users/scalixte/Developments/git/MediChat/MediChat-Users/controllers/api/v1/channels.go	/^func CreateChannel(c *gin.Context) {$/;"	func	line:77
+UpdateChannel	/Users/scalixte/Developments/git/MediChat/MediChat-Users/controllers/api/v1/channels.go	/^func UpdateChannel(c *gin.Context) {$/;"	func	line:95
+DeleteChannel	/Users/scalixte/Developments/git/MediChat/MediChat-Users/controllers/api/v1/channels.go	/^func DeleteChannel(c *gin.Context) {$/;"	func	line:107
+Message	/Users/scalixte/Developments/git/MediChat/MediChat-Users/sockets/messages.go	/^type Message struct {$/;"	type	line:5
+GetUserPref	/Users/scalixte/Developments/git/MediChat/MediChat-Users/controllers/api/v1/userPrefs.go	/^func GetUserPref(c *gin.Context) {$/;"	func	line:20
+UpdateUserPref	/Users/scalixte/Developments/git/MediChat/MediChat-Users/controllers/api/v1/userPrefs.go	/^func UpdateUserPref(c *gin.Context) {$/;"	func	line:39
+Message	/Users/scalixte/Developments/git/MediChat/MediChat-Users/helpers/mediSockets.go	/^type Message struct {$/;"	type	line:9
+socketUpgrader	/Users/scalixte/Developments/git/MediChat/MediChat-Users/helpers/mediSockets.go	/^var socketUpgrader = websocket.Upgrader{$/;"	var	line:17
+HandleIncoming	/Users/scalixte/Developments/git/MediChat/MediChat-Users/helpers/mediSockets.go	/^func HandleIncoming(w http.ResponseWriter, r *http.Request, isChatBot bool) {$/;"	func	line:25
+InitRoutes	/Users/scalixte/Developments/git/MediChat/MediChat-Users/configs/routes.go	/^func InitRoutes() *gin.Engine {$/;"	func	line:19
+SayHello	/Users/scalixte/Developments/git/MediChat/MediChat-Users/configs/routes.go	/^func SayHello() {$/;"	func	line:59
+HandleConnection	/Users/scalixte/Developments/git/MediChat/MediChat-Users/controllers/sockets/mediSockets.go	/^func HandleConnection(c *gin.Context) {$/;"	func	line:12
+HandleConnection	/Users/scalixte/Developments/git/MediChat/MediChat-Users/controllers/sockets/webSockets.go	/^func HandleConnection(c *gin.Context) {$/;"	func	line:12
 Channel	/Users/scalixte/Developments/git/MediChat/MediChat-Users/models/channels.go	/^type Channel struct {$/;"	type	line:10
 CreateChannelTable	/Users/scalixte/Developments/git/MediChat/MediChat-Users/models/channels.go	/^func CreateChannelTable() {$/;"	func	line:21
 DropChannelTable	/Users/scalixte/Developments/git/MediChat/MediChat-Users/models/channels.go	/^func DropChannelTable() {$/;"	func	line:26
@@ -30,14 +49,27 @@ CreateChannel	/Users/scalixte/Developments/git/MediChat/MediChat-Users/models/ch
 CreateGalleryChat	/Users/scalixte/Developments/git/MediChat/MediChat-Users/models/channels.go	/^func CreateGalleryChat() error {$/;"	func	line:75
 CreateAChatBot	/Users/scalixte/Developments/git/MediChat/MediChat-Users/models/channels.go	/^func CreateAChatBot(userId uint)(Channel, error) {$/;"	func	line:85
 UpdateChannel	/Users/scalixte/Developments/git/MediChat/MediChat-Users/models/channels.go	/^func UpdateChannel(id int, maps interface{})(Channel, error) {$/;"	func	line:98
-InitApp	/Users/scalixte/Developments/git/MediChat/MediChat-Users/main.go	/^func InitApp() {$/;"	func	line:31
-InitDatabase	/Users/scalixte/Developments/git/MediChat/MediChat-Users/main.go	/^func InitDatabase() {$/;"	func	line:36
-InitWebServer	/Users/scalixte/Developments/git/MediChat/MediChat-Users/main.go	/^func InitWebServer() {$/;"	func	line:45
-main	/Users/scalixte/Developments/git/MediChat/MediChat-Users/main.go	/^func main() {$/;"	func	line:65
-InitRoutes	/Users/scalixte/Developments/git/MediChat/MediChat-Users/configs/routes.go	/^func InitRoutes() *gin.Engine {$/;"	func	line:18
-SayHello	/Users/scalixte/Developments/git/MediChat/MediChat-Users/configs/routes.go	/^func SayHello() {$/;"	func	line:56
-GetChannel	/Users/scalixte/Developments/git/MediChat/MediChat-Users/controllers/api/v1/channels.go	/^func GetChannel(c *gin.Context) {$/;"	func	line:23
-GetChannels	/Users/scalixte/Developments/git/MediChat/MediChat-Users/controllers/api/v1/channels.go	/^func GetChannels(c *gin.Context) {$/;"	func	line:47
-CreateChannel	/Users/scalixte/Developments/git/MediChat/MediChat-Users/controllers/api/v1/channels.go	/^func CreateChannel(c *gin.Context) {$/;"	func	line:77
-UpdateChannel	/Users/scalixte/Developments/git/MediChat/MediChat-Users/controllers/api/v1/channels.go	/^func UpdateChannel(c *gin.Context) {$/;"	func	line:92
-DeleteChannel	/Users/scalixte/Developments/git/MediChat/MediChat-Users/controllers/api/v1/channels.go	/^func DeleteChannel(c *gin.Context) {$/;"	func	line:104
+User	/Users/scalixte/Developments/git/MediChat/MediChat-Users/models/users.go	/^type User struct {$/;"	type	line:11
+CreateUserModel	/Users/scalixte/Developments/git/MediChat/MediChat-Users/models/users.go	/^type CreateUserModel struct {$/;"	type	line:21
+CreateUserTable	/Users/scalixte/Developments/git/MediChat/MediChat-Users/models/users.go	/^func CreateUserTable() {$/;"	func	line:29
+CreateFirstUsers	/Users/scalixte/Developments/git/MediChat/MediChat-Users/models/users.go	/^func CreateFirstUsers() {$/;"	func	line:34
+CreateUser	/Users/scalixte/Developments/git/MediChat/MediChat-Users/models/users.go	/^func CreateUser(data CreateUserModel) (User, error) {$/;"	func	line:58
+GetUsers	/Users/scalixte/Developments/git/MediChat/MediChat-Users/models/users.go	/^func GetUsers() ([]*User, int, error) {$/;"	func	line:86
+users	/Users/scalixte/Developments/git/MediChat/MediChat-Users/models/users.go	/^	var users []*User$/;"	var	line:87
+total	/Users/scalixte/Developments/git/MediChat/MediChat-Users/models/users.go	/^	var total int$/;"	var	line:94
+GetUser	/Users/scalixte/Developments/git/MediChat/MediChat-Users/models/users.go	/^func GetUser(id int) (User, error) {$/;"	func	line:100
+user	/Users/scalixte/Developments/git/MediChat/MediChat-Users/models/users.go	/^	var user User$/;"	var	line:101
+GetUserByEmail	/Users/scalixte/Developments/git/MediChat/MediChat-Users/models/users.go	/^func GetUserByEmail(email string) (User, error) {$/;"	func	line:109
+user	/Users/scalixte/Developments/git/MediChat/MediChat-Users/models/users.go	/^	var user User$/;"	var	line:110
+GetUserWithPref	/Users/scalixte/Developments/git/MediChat/MediChat-Users/models/users.go	/^func GetUserWithPref(user User, userPref UserPref) User {$/;"	func	line:118
+CreateUser	/Users/scalixte/Developments/git/MediChat/MediChat-Users/models/users.go	/^\/\/ func CreateUser(data map[string]interface{}) (User, error) {$/;"	func	line:123
+GetUsers	/Users/scalixte/Developments/git/MediChat/MediChat-Users/models/users.go	/^\/\/ func GetUsers(pageNum int, pageSize int, maps interface{}) ([]*User, error) {$/;"	func	line:139
+users	/Users/scalixte/Developments/git/MediChat/MediChat-Users/models/users.go	/^\/\/ 	var users []*User$/;"	var	line:140
+DropUserTable	/Users/scalixte/Developments/git/MediChat/MediChat-Users/models/users.go	/^func DropUserTable() {$/;"	func	line:149
+Authorize	/Users/scalixte/Developments/git/MediChat/MediChat-Users/controllers/api/signup.go	/^func Authorize(c *gin.Context) {$/;"	func	line:12
+Authenticate	/Users/scalixte/Developments/git/MediChat/MediChat-Users/controllers/api/signin.go	/^func Authenticate(c *gin.Context) {$/;"	func	line:10
+GetUser	/Users/scalixte/Developments/git/MediChat/MediChat-Users/controllers/api/v1/users.go	/^func GetUser(c *gin.Context) {$/;"	func	line:22
+GetUsers	/Users/scalixte/Developments/git/MediChat/MediChat-Users/controllers/api/v1/users.go	/^func GetUsers(c *gin.Context) {$/;"	func	line:46
+Message	/Users/scalixte/Developments/git/MediChat/MediChat-Users/helpers/socketHelper.go	/^type Message struct {$/;"	type	line:9
+socketUpgrader	/Users/scalixte/Developments/git/MediChat/MediChat-Users/helpers/socketHelper.go	/^var socketUpgrader = websocket.Upgrader{$/;"	var	line:16
+HandleIncoming	/Users/scalixte/Developments/git/MediChat/MediChat-Users/helpers/socketHelper.go	/^func HandleIncoming(w http.ResponseWriter, r *http.Request, isChatBot bool) {$/;"	func	line:24

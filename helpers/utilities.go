@@ -1,6 +1,7 @@
 package helpers
 
 import (
+  "fmt"
   "time"
   "math/rand"
 )
@@ -22,12 +23,8 @@ func RandomColor() string {
   rand.Seed(time.Now().UnixNano())
 	return array[rand.Intn(len(array))]
 }
-//
-// func createDatabase(db) {
-//   if(!db.HasTable(&User{})){ createUserTable(db) }
-//   if(!db.HasTable(&Channel{})) {
-//     createChannelTable(db)
-//     if(!db.HasTable(&UserChannel{})){ createUserChannelTable(db) }
-//   }
-//
-// }
+
+func RandomLegoGravatar() string {
+  index := rand.Intn(9)
+  return fmt.Sprintf("https://randomuser.me/api/portraits/lego/%d.jpg", index)
+}

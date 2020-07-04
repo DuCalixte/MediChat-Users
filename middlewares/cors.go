@@ -6,7 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func CORSMiddleware() gin.HandlerFunc {
+func UseCors() gin.HandlerFunc {
   return func(c *gin.Context) {
     c.Writer.Header().Set("Access-Control-Allow-Origin", c.Request.Header.Get("Origin"))
     c.Writer.Header().Set("Access-Control-Max-Age", "86400")

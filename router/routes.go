@@ -1,4 +1,4 @@
-package configs
+package router
 
 import (
   "log"
@@ -9,6 +9,7 @@ import (
   "github.com/swaggo/gin-swagger"
   "github.com/swaggo/gin-swagger/swaggerFiles"
 
+  "github.com/DuCalixte/MediChat-Users/controllers/sockets"
   "github.com/DuCalixte/MediChat-Users/controllers/api"
   "github.com/DuCalixte/MediChat-Users/controllers/api/v1"
 
@@ -19,9 +20,13 @@ func InitRoutes() *gin.Engine {
   route := gin.New()
 	route.Use(gin.Logger())
 	route.Use(gin.Recovery())
-  route.Use(middlewares.CORSMiddleware())
+  route.Use(middlewares.UseCors())
 
   apiv1 := route.Group("/api/v1")
+
+  // route.GET("/socket/:id", sockets.HandleConnection)
+  route.GET("socket/:userId/channel/:id", sockets.HandleConnection)
+    // route.GET("/ws", sockets.HandleConnection)
 
   route.POST("/signin", api.Authenticate)
   route.POST("/signup", api.Authorize)
@@ -30,7 +35,7 @@ func InitRoutes() *gin.Engine {
 	route.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 // TODO Use JWT
-  apiv1.Use(gin.Logger())
+  apiv1.Use(middlewares.UseJWT())
   {
     // Users API
     apiv1.GET("/users/:id", v1.GetUser)
@@ -38,7 +43,6 @@ func InitRoutes() *gin.Engine {
 
     // User Preferences API
     apiv1.GET("/userPrefs/:id", v1.GetUserPref) // TODO - Implement
-    apiv1.POST("/userPrefs/:user_id", v1.CreateUserPref) // TODO - Implement
     apiv1.PUT("/userPrefs/:id", v1.UpdateUserPref) // TODO - Implement
 
     // Channels API

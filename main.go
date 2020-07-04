@@ -21,6 +21,8 @@ import (
   "github.com/DuCalixte/MediChat-Users/models"
     // _ "github.com/DuCalixte/MediChat-Users/models/users"
   "github.com/DuCalixte/MediChat-Users/configs"
+  "github.com/DuCalixte/MediChat-Users/router"
+  // "github.com/DuCalixte/MediChat-Users/hubsockets"
   // "github.com/DuCalixte/MediChat-Users/configs/routes"
 
   // "github.com/DuCalixte/MediChat-Users/configs"
@@ -29,21 +31,24 @@ import (
 )
 
 func InitApp() {
+  configs.InitSettings()
   InitDatabase()
+  InitWebSocket()
+  // helpers.InitSocket()
+  // router.InitWebServer()
+  //
   InitWebServer()
 }
 
-func InitDatabase() {
-  db, err := configs.LoadDatabase()
-  if err != nil {
-    log.Printf("Unable to connect to database with \n-error:%v \n- database:%v", err, db)
-    return
-  }
-  models.Init(db)
+func InitWebSocket() {
+  // hub := hubsockets.newHub()
+	// go hub.run()
+  // Allow collection of memory referenced by the caller by doing all work in
+  // new goroutines.
 }
 
 func InitWebServer() {
-  routesInit := configs.InitRoutes()
+  routesInit := router.InitRoutes()
 	readTimeout := 60 * time.Second
 	writeTimeout := 60 * time.Second
 	endPoint := fmt.Sprintf(":%d", 8001)
@@ -60,6 +65,11 @@ func InitWebServer() {
 	log.Printf("[info] start http server listening %s", endPoint)
 
 	server.ListenAndServe()
+}
+
+func InitDatabase() {
+  models.Init()
+  models.InitializeTable()
 }
 
 func main() {

@@ -6,19 +6,20 @@ import (
   "errors"
   "strings"
   "golang.org/x/crypto/bcrypt"
+
+  "github.com/DuCalixte/MediChat-Users/settings"
 )
 
 func GeneratePasswordEncrypt(password string) (string, string, error) {
   pwd := []byte(password)
 
-  if (len(pwd) < 8) {
-    log.Printf("lenth %d", len(pwd))
-    fmt.Printf("password must be greater than 8 characters")
+  if (len(pwd) < settings.SecuritySetting.MinPasswordSize) {
+    log.Printf("length %d", len(pwd))
+    fmt.Printf("password must be greater than %d characters", settings.SecuritySetting.MinPasswordSize)
     return "", "", errors.New("Insufficient characters.")
   }
 
-  costFactor := 11
-  hash, err := bcrypt.GenerateFromPassword(pwd, costFactor)
+  hash, err := bcrypt.GenerateFromPassword(pwd, settings.SecuritySetting.CostFactor)
   if err != nil {
     fmt.Printf("error generating bcrypt hash: %v\n", err)
     return "","", err
@@ -29,7 +30,8 @@ func GeneratePasswordEncrypt(password string) (string, string, error) {
 }
 
 func DecryptEncryptedGeneratedPassword(password string, hash string, salt string) (bool, error) {
-  hashsalt := []byte("$2a$11$" + salt + hash)
+  cypherHash := fmt.Sprintf("$2a$%d$%s%s", settings.SecuritySetting.CostFactor, salt, hash)
+  hashsalt := []byte(cypherHash)
   pwd := []byte(password)
 
   err := bcrypt.CompareHashAndPassword(hashsalt, pwd)

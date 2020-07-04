@@ -9,18 +9,24 @@ import (
 
 type UserPref struct {
 	gorm.Model
-	UserId  	uint		`json:"userId" gorm:"primary_key";valid:"required"`
-	Gravatar 	string 	`json:"gravatar"`
-	Color   	string 	`json:"color" valid:"required"`
-	AboutMe 	string 	`json:"aboutMe" gorm:"type:varchar(500)"`
-	IsLocal 	bool   	`json:"isLocal" gorm:"default:true"`
+	UserId  		uint		`json:"userId" gorm:"primary_key";valid:"required"`
+	Firstname 	string 	`json:"firstname" gorm:"type:varchar(100)"`
+	Lastname  	string 	`json:"lastname"  gorm:"type:varchar(100)"`
+	Nickname  	string 	`json:"nickname" 	valid:"required" gorm:"type:varchar(100);unique_index; not null"`
+	Gravatar 		string 	`json:"gravatar"`
+	Color   		string 	`json:"color" valid:"required"`
+	Status 			string 	`json:"status" gorm:"type:varchar(500)"`
+	IsLocal 		bool   	`json:"isLocal" gorm:"default:true"`
 }
 
 type CreateUserPrefModel struct {
-  UserId 		uint		`form:"userId" 		json:"userId" binding:"required"`
-  Gravatar 	string 	`form:"gravatar" 	json:"gravatar" binding:"required"`
-	AboutMe 	string 	`form:"aboutMe" 	json:"aboutMe" binding:"required"`
-	IsLocal 	string 	`form:"isLocal" 	json:"isLocal" binding:"required"`
+  UserId 		uint		`form:"userId" 			json:"userId" binding:"required"`
+	Nickname 	string 	`form:"nickname" 		json:"nickname" binding:"required"`
+	Firsname 	string 	`form:"firstname" 	json:"firstname" binding:"required"`
+	Lastname 	string 	`form:"lastname" 		json:"lastname" binding:"required"`
+  Gravatar 	string 	`form:"gravatar" 		json:"gravatar" binding:"required"`
+	Status	 	string 	`form:"status" 			json:"status" binding:"required"`
+	IsLocal 	string 	`form:"isLocal" 		json:"isLocal" binding:"required"`
 }
 
 func CreateUserPrefTable() {
@@ -63,7 +69,7 @@ func CreateUserPref(userId uint, data map[string]interface{}) (UserPref, error) 
 		UserId:			userId,
 		Gravatar:		data["gravatar"].(string),
 		Color:			data["color"].(string),
-		AboutMe:		data["aboutMe"].(string),
+		Status:			data["status"].(string),
 		IsLocal:		data["isLocal"].(bool) }
 
 	DB.NewRecord(userPref) // => returns `true` as primary key is blank

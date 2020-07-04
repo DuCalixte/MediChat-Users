@@ -70,6 +70,15 @@ var doc = `{
             },
             "post": {
                 "description": "create a new channel",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "channels"
+                ],
                 "summary": "Create channel",
                 "responses": {
                     "200": {

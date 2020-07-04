@@ -86,7 +86,11 @@ paths:
             type: array
       summary: List channels
     post:
+      consumes:
+      - application/json
       description: create a new channel
+      produces:
+      - application/json
       responses:
         "200":
           description: OK
@@ -97,6 +101,8 @@ paths:
           schema:
             $ref: '#/definitions/models.Channel'
       summary: Create channel
+      tags:
+      - channels
   /api/v1/channels/{id}:
     get:
       consumes:
