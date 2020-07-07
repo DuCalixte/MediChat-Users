@@ -1,14 +1,11 @@
 package helpers
 
 import (
-  // "fmt"
 	"time"
   "github.com/dgrijalva/jwt-go"
 
     "github.com/DuCalixte/MediChat-Users/settings"
 )
-
-// var jwtSecret []byte
 
 type Claims struct {
 	Email    string `json:"email"`

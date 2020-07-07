@@ -1,10 +1,10 @@
 package models
 
 import (
-	// "log"
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
+	"github.com/DuCalixte/MediChat-Users/utilSocket"
 )
 
 type Channel struct {
@@ -70,6 +70,9 @@ func CreateChannel(user User, name string, description string, isPrivate bool)(C
 	if err := DB.Create(&channel).Error; err != nil {
 		return Channel{}, err
 	}
+
+	channelType  := func() int { if isPrivate { return 1 } else { return 3 } }()
+	utilSocket.AddChannel(name, channel.ID, channelType)
 	return channel, nil
 }
 
@@ -79,8 +82,8 @@ func CreateGalleryChat() error {
 	if err := DB.Create(&channel).Error; err != nil {
 		return err
 	}
-
-return nil
+	utilSocket.AddChannel("Gallery", channel.ID, 1)
+	return nil
 }
 
 func CreateAChatBot(userId uint)(Channel, error) {
@@ -93,6 +96,7 @@ func CreateAChatBot(userId uint)(Channel, error) {
 	if err := DB.Create(&channel).Error; err != nil {
 		return Channel{}, err
 	}
+	utilSocket.AddChatBotChannel(channel.ID)
 	return channel, nil
 }
 

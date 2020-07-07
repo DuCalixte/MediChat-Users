@@ -12,6 +12,13 @@ type App struct {
 }
 var AppSetting = &App{}
 
+type Notification struct {
+  PrivateKey       string
+  PublicKey       string
+  Subscriber       string
+}
+var NotificationSetting = &Notification{}
+
 type Security struct {
   CostFactor      int
   JwtSecret       string
@@ -65,6 +72,7 @@ func InitSettings() {
 	mapTo("server", ServerSetting)
 	mapTo("database", DatabaseSetting)
 	mapTo("redis", RedisSetting)
+	mapTo("notification", NotificationSetting)
 }
 
 func mapTo(section string, v interface{}) {

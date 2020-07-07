@@ -1,11 +1,14 @@
 package models
 
 import (
-	// "log"
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 	"github.com/DuCalixte/MediChat-Users/helpers"
+)
+
+const (
+	personnelChatDesc = "You have your own personnel channet - So go talk to your self"
 )
 
 type User struct {
@@ -90,8 +93,10 @@ func CreateUser(data CreateUserModel) (User, error) {
 		DB.Model(&user).Association("Channels").Append(chatbotChannel)
 	}
 
-	// DB.Model(&user).Related(&[]Channel{},  "Channel")
-	// DB.Preload(Channel)
+	selfChannel, err := CreateChannel(user, data.Nickname, personnelChatDesc, true)
+	if err == nil {
+		DB.Model(&user).Association("Channels").Append(selfChannel)
+	}
 
 	return user, nil
 }

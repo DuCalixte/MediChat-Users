@@ -2,9 +2,6 @@ package router
 
 import (
   "log"
-  // "time"
-  // "net/http"
-  // "github.com/gin-contrib/cors"
   "github.com/gin-gonic/gin"
   "github.com/swaggo/gin-swagger"
   "github.com/swaggo/gin-swagger/swaggerFiles"
@@ -51,12 +48,7 @@ func InitRoutes() *gin.Engine {
     apiv1.POST("/channels/:user_id", v1.CreateChannel)  // TODO - Implement
     apiv1.PUT("/channels/:id", v1.UpdateChannel)  // TODO - Implement
     apiv1.DELETE("/channels/:id", v1.DeleteChannel) // TODO - Implement
-
   }
 
   return route
-}
-
-func SayHello() {
-  log.Println("Hello")
 }

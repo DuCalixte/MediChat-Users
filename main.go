@@ -22,6 +22,8 @@ import (
     // _ "github.com/DuCalixte/MediChat-Users/models/users"
   "github.com/DuCalixte/MediChat-Users/configs"
   "github.com/DuCalixte/MediChat-Users/router"
+  "github.com/DuCalixte/MediChat-Users/utilSocket"
+  "github.com/DuCalixte/MediChat-Users/notifier"
   // "github.com/DuCalixte/MediChat-Users/hubsockets"
   // "github.com/DuCalixte/MediChat-Users/configs/routes"
 
@@ -32,12 +34,14 @@ import (
 
 func InitApp() {
   configs.InitSettings()
+  utilSocket.InitBus()
   InitDatabase()
   InitWebSocket()
   // helpers.InitSocket()
   // router.InitWebServer()
   //
   InitWebServer()
+  notifier.InitNotifier()
 }
 
 func InitWebSocket() {

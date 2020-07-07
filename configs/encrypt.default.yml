@@ -1,4 +1,0 @@
-encrypt {
-  minCount: 8 # Minimum number of characters in the password
-  costFactor: 11 # cost factor for password - the higher the more complex and the more computing power needed
-}

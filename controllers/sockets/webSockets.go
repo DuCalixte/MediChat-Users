@@ -6,20 +6,9 @@ import(
   "github.com/unknwon/com"
 
   "github.com/DuCalixte/MediChat-Users/models"
-  // "github.com/DuCalixte/MediChat-Users/helpers"
-  "github.com/DuCalixte/MediChat-Users/hubsockets"
+	"github.com/DuCalixte/MediChat-Users/utilSocket"
 )
 
-// func HandleConnection(c *gin.Context) {
-//   id := com.StrTo(c.Param("id")).MustInt()
-//
-//   channel, err := models.GetChannel(id)
-//   if err != nil {
-//     c.JSON(http.StatusUnauthorized, gin.H{"status": http.StatusUnauthorized, "error": "Unable to recognize request!"})
-//     return
-// 	}
-//   helpers.HandleIncoming(c.Writer, c.Request, channel.IsAChatBot)
-// }
 
 func HandleConnection(c *gin.Context) {
   channelId := com.StrTo(c.Param("id")).MustInt()
@@ -38,11 +27,10 @@ func HandleConnection(c *gin.Context) {
 	}
 
   if models.VerifyUserChannel(userId, channelId) {
-    hub := hubsockets.NewHub(channel.ID)
-  	go hub.Run()
 
-    hubsockets.HandleIncoming(hub, c.Writer, c.Request, channel, user)
-    // hubsockets.HandleIncoming(hub, c.Writer, c.Request)
+    // utilSocket.HandleIncoming(utilSocket.BUS.channels[channelId], c.Writer, c.Request, user.Email)
+    socketChannel := utilSocket.BUS.At(channel.ID)
+    utilSocket.HandleIncoming(&socketChannel, c.Writer, c.Request, user.Email)
   } else {
     c.JSON(http.StatusUnauthorized, gin.H{"status": http.StatusUnauthorized, "error": "User is not allowed in channel!"})
     return

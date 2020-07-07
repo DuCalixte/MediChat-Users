@@ -1,14 +1,12 @@
-package hubsockets
+package utilSocket
 
 import (
   "bytes"
-  // "fmt"
 	"log"
 	"net/http"
 	"time"
 
 	"github.com/gorilla/websocket"
-  "github.com/DuCalixte/MediChat-Users/models"
 )
 
 const (
@@ -38,9 +36,9 @@ var upgrader = websocket.Upgrader{
 	WriteBufferSize: 1024,
 }
 
-// Client is a middleman between the websocket connection and the hub.
+// Client is a middleman between the websocket connection and the channel.
 type Client struct {
-	hub *Hub
+	channel *Channel
 
 	// The websocket connection.
 	conn *websocket.Conn
@@ -48,19 +46,18 @@ type Client struct {
 	// Buffered channel of outbound messages.
 	send chan []byte
 
-  channelId uint
-
-  user models.User
+  email string
 }
 
-// readPump pumps messages from the websocket connection to the hub.
+// readPump pumps messages from the websocket connection to the channel.
 //
 // The application runs readPump in a per-connection goroutine. The application
 // ensures that there is at most one reader on a connection by executing all
 // reads from this goroutine.
 func (c *Client) readPump() {
 	defer func() {
-		c.hub.unregister <- c
+    // channel := (c.channel).Channel
+		c.channel.unregister <- c
 		c.conn.Close()
 	}()
 	c.conn.SetReadLimit(maxMessageSize)
@@ -75,11 +72,11 @@ func (c *Client) readPump() {
 			break
 		}
 		message = bytes.TrimSpace(bytes.Replace(message, newline, space, -1))
-		c.hub.broadcast <- message
+		c.channel.broadcast <- message
 	}
 }
 
-// writePump pumps messages from the hub to the websocket connection.
+// writePump pumps messages from the channel to the websocket connection.
 //
 // A goroutine running writePump is started for each connection. The
 // application ensures that there is at most one writer to a connection by
@@ -95,7 +92,7 @@ func (c *Client) writePump() {
 		case message, ok := <-c.send:
 			c.conn.SetWriteDeadline(time.Now().Add(writeWait))
 			if !ok {
-				// The hub closed the channel.
+				// The channel closed the channel.
 				c.conn.WriteMessage(websocket.CloseMessage, []byte{})
 				return
 			}
@@ -126,19 +123,14 @@ func (c *Client) writePump() {
 }
 
 // serveWs handles websocket requests from the peer.
-func HandleIncoming(hub *Hub, w http.ResponseWriter, r *http.Request, channel models.Channel, user models.User) {
+func HandleIncoming(channel *Channel, w http.ResponseWriter, r *http.Request, email string) {
 	conn, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
 		log.Println(err)
 		return
 	}
-	client := &Client{hub: hub, conn: conn, send: make(chan []byte, 256), channelId: channel.ID, user: user}
-	client.hub.register <- client
-
-  if channel.IsAChatBot {
-    // Process Chatbot response
-    // ProcessChatbotResponse(msg)
-  }
+	client := &Client{channel: channel, conn: conn, send: make(chan []byte, 256), email: email }
+	client.channel.register <- client
 
 	// Allow collection of memory referenced by the caller by doing all work in
 	// new goroutines.
