@@ -32,6 +32,64 @@ var doc = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/api/signin": {
+            "post": {
+                "description": "authenticates the user access and provides the user resource with a token",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "signin"
+                ],
+                "summary": "Authenticate a user access",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "headers": {
+                            "Token": {
+                                "type": "object",
+                                "description": "qwerty"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/signup": {
+            "post": {
+                "description": "authorizes the user access and provides the user resource with a token",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "signin"
+                ],
+                "summary": "Authorize a user to access",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "headers": {
+                            "Token": {
+                                "type": "object",
+                                "description": "qwerty"
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/v1/channels": {
             "get": {
                 "description": "get channels",
@@ -130,6 +188,201 @@ var doc = `{
                         }
                     }
                 }
+            },
+            "put": {
+                "description": "Update by json channel",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "channels"
+                ],
+                "summary": "Update an channel",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Channel ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Channel"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/userPrefs/{id}": {
+            "get": {
+                "description": "provides user profile",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Show information on specific user profile",
+                "operationId": "get-string-by-int",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "UserPref ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.UserPref"
+                        },
+                        "headers": {
+                            "Token": {
+                                "type": "string",
+                                "description": "qwerty"
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Update by json userPref",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "userPrefs"
+                ],
+                "summary": "Update an userPref",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "UserPref ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.UserPref"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/users": {
+            "get": {
+                "description": "get all users",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "List all Users",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "name search by q",
+                        "name": "q",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.User"
+                            }
+                        },
+                        "headers": {
+                            "Token": {
+                                "type": "string",
+                                "description": "qwerty"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/users/{id}": {
+            "get": {
+                "description": "provides user information with preferences in models.UserPref and channels from models.Channel",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Show information on specific user",
+                "operationId": "get-string-by-int",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "User ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.User"
+                        },
+                        "headers": {
+                            "Token": {
+                                "type": "string",
+                                "description": "qwerty"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/{userId}/channel/{id}": {
+            "get": {
+                "description": "gets User ID and Channel ID and creates a new client connection",
+                "consumes": [
+                    "application/json"
+                ],
+                "summary": "Connects a user on a channel to the websocket circuit",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "User ID",
+                        "name": "user_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Channel ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {}
             }
         }
     },
@@ -137,11 +390,11 @@ var doc = `{
         "models.Channel": {
             "type": "object",
             "properties": {
+                "chatBot": {
+                    "type": "boolean"
+                },
                 "description": {
                     "type": "string"
-                },
-                "isAChatBot": {
-                    "type": "boolean"
                 },
                 "isPrivate": {
                     "type": "boolean"
@@ -153,13 +406,11 @@ var doc = `{
                     "type": "integer"
                 },
                 "users": {
+                    "description": "WebSocket\t\t string\t\t` + "`" + `json:\"websocket\"  gorm:\"type:varchar(256)\"` + "`" + `",
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/models.User"
                     }
-                },
-                "websocket": {
-                    "type": "string"
                 }
             }
         },
@@ -175,28 +426,19 @@ var doc = `{
                 "email": {
                     "type": "string"
                 },
-                "firstname": {
-                    "type": "string"
-                },
-                "lastname": {
-                    "type": "string"
-                },
                 "profile": {
                     "type": "object",
                     "$ref": "#/definitions/models.UserPref"
-                },
-                "username": {
-                    "type": "string"
                 }
             }
         },
         "models.UserPref": {
             "type": "object",
             "properties": {
-                "aboutMe": {
+                "color": {
                     "type": "string"
                 },
-                "color": {
+                "firstname": {
                     "type": "string"
                 },
                 "gravatar": {
@@ -204,6 +446,15 @@ var doc = `{
                 },
                 "isLocal": {
                     "type": "boolean"
+                },
+                "lastname": {
+                    "type": "string"
+                },
+                "nickname": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
                 },
                 "userId": {
                     "type": "integer"

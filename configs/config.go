@@ -50,3 +50,23 @@ func CloseFile(file *os.File) {
 func InitSettings() {
   settings.InitSettings()
 }
+
+// func InitWebServer() {
+//   routesInit := router.InitRoutes()
+// 	readTimeout := 60 * time.Second
+// 	writeTimeout := 60 * time.Second
+// 	endPoint := fmt.Sprintf(":%d", settings.ServerSetting.HttpPort)
+// 	maxHeaderBytes := 1 << 20
+//
+// 	server := &http.Server{
+// 		Addr:           endPoint,
+// 		Handler:        routesInit,
+// 		ReadTimeout:    readTimeout,
+// 		WriteTimeout:   writeTimeout,
+// 		MaxHeaderBytes: maxHeaderBytes,
+// 	}
+//
+// 	log.Printf("[info] start http server listening %s", endPoint)
+//
+// 	server.ListenAndServe()
+// }

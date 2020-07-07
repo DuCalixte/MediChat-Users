@@ -9,7 +9,16 @@ import(
 	"github.com/DuCalixte/MediChat-Users/utilSocket"
 )
 
-
+// HandleConnection godoc
+// @Summary Connects a user on a channel to the websocket circuit
+// @Description gets User ID and Channel ID and creates a new client connection
+// @USER_ID get-string-by-int
+// @CHANNEL_ID get-string-by-int
+// @Accept  json
+// @Param user_id path int true "User ID"
+// @Param id path int true "Channel ID"
+// @Header 200 {string} Token "qwerty"
+// @Router /user/{userId}/channel/{id} [get]
 func HandleConnection(c *gin.Context) {
   channelId := com.StrTo(c.Param("id")).MustInt()
   userId := com.StrTo(c.Param("userId")).MustInt()
@@ -27,8 +36,6 @@ func HandleConnection(c *gin.Context) {
 	}
 
   if models.VerifyUserChannel(userId, channelId) {
-
-    // utilSocket.HandleIncoming(utilSocket.BUS.channels[channelId], c.Writer, c.Request, user.Email)
     socketChannel := utilSocket.BUS.At(channel.ID)
     utilSocket.HandleIncoming(&socketChannel, c.Writer, c.Request, user.Email)
   } else {

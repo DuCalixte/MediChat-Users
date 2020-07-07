@@ -9,6 +9,20 @@ import(
   "github.com/DuCalixte/MediChat-Users/helpers"
 )
 
+// Authorize godoc
+// @Summary Authorize a user to access
+// @Description authorizes the user access and provides the user resource with a token
+// @Tags signin
+// @Accept  json
+// @Produce  json
+// parameters:
+//  - in: body
+//    required: true
+//    schema:
+//       $ref: "#/definitions/createAuthorizeRequest"
+// @Success 200 {object} string
+// @Header 200 {object} Token "qwerty"
+// @Router /api/signup [post]
 func Authorize(c *gin.Context) {
   params := models.CreateUserModel{}
   c.BindJSON(&params)

@@ -13,7 +13,7 @@ import (
 var DB *gorm.DB
 
 func Init() {
-	uri := fmt.Sprintf("host=%s port=%s user=%s dbname=%s password=%q sslmode=%s",
+	uri := fmt.Sprintf("host=%s port=%s user=%s dbname=%s password=%s sslmode=%s",
 		settings.DatabaseSetting.Host,
 		settings.DatabaseSetting.Port,
 		settings.DatabaseSetting.User,

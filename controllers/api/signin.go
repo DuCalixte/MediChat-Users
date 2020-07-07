@@ -7,6 +7,20 @@ import(
   "github.com/DuCalixte/MediChat-Users/helpers"
 )
 
+// Authenticate godoc
+// @Summary Authenticate a user access
+// @Description authenticates the user access and provides the user resource with a token
+// @Tags signin
+// @Accept  json
+// @Produce  json
+// parameters:
+//  - in: body
+//    required: true
+//    schema:
+//       $ref: "#/definitions/createAuthenticateRequest"
+// @Success 200 {object} string
+// @Header 200 {object} Token "qwerty"
+// @Router /api/signin [post]
 func Authenticate(c *gin.Context) {
   params := models.AuthenticateUserModel{}
   c.BindJSON(&params)

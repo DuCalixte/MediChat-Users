@@ -62,7 +62,7 @@ var RedisSetting = &Redis{}
 var cfg *ini.File
 func InitSettings() {
   var err error
-	cfg, err = ini.Load("settings/app.ini")
+	cfg, err = ini.Load("./app.ini")
 	if err != nil {
 		log.Fatalf("settings.Initsettings, fail to parse 'settings/app.ini': %v", err)
 	}

@@ -1,10 +1,10 @@
 definitions:
   models.Channel:
     properties:
+      chatBot:
+        type: boolean
       description:
         type: string
-      isAChatBot:
-        type: boolean
       isPrivate:
         type: boolean
       name:
@@ -12,11 +12,10 @@ definitions:
       ownerId:
         type: integer
       users:
+        description: "WebSocket\t\t string\t\t`json:\"websocket\"  gorm:\"type:varchar(256)\"`"
         items:
           $ref: '#/definitions/models.User'
         type: array
-      websocket:
-        type: string
     type: object
   models.User:
     properties:
@@ -26,26 +25,26 @@ definitions:
         type: array
       email:
         type: string
-      firstname:
-        type: string
-      lastname:
-        type: string
       profile:
         $ref: '#/definitions/models.UserPref'
         type: object
-      username:
-        type: string
     type: object
   models.UserPref:
     properties:
-      aboutMe:
-        type: string
       color:
+        type: string
+      firstname:
         type: string
       gravatar:
         type: string
       isLocal:
         type: boolean
+      lastname:
+        type: string
+      nickname:
+        type: string
+      status:
+        type: string
       userId:
         type: integer
     type: object
@@ -61,6 +60,44 @@ info:
   title: MediChat API
   version: "1.0"
 paths:
+  /api/signin:
+    post:
+      consumes:
+      - application/json
+      description: authenticates the user access and provides the user resource with a token
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          headers:
+            Token:
+              description: qwerty
+              type: object
+          schema:
+            type: string
+      summary: Authenticate a user access
+      tags:
+      - signin
+  /api/signup:
+    post:
+      consumes:
+      - application/json
+      description: authorizes the user access and provides the user resource with a token
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          headers:
+            Token:
+              description: qwerty
+              type: object
+          schema:
+            type: string
+      summary: Authorize a user to access
+      tags:
+      - signin
   /api/v1/channels:
     get:
       consumes:
@@ -127,4 +164,134 @@ paths:
           schema:
             $ref: '#/definitions/models.Channel'
       summary: Show information on specific channel
+    put:
+      consumes:
+      - application/json
+      description: Update by json channel
+      parameters:
+      - description: Channel ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Channel'
+      summary: Update an channel
+      tags:
+      - channels
+  /api/v1/userPrefs/{id}:
+    get:
+      consumes:
+      - application/json
+      description: provides user profile
+      operationId: get-string-by-int
+      parameters:
+      - description: UserPref ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          headers:
+            Token:
+              description: qwerty
+              type: string
+          schema:
+            $ref: '#/definitions/models.UserPref'
+      summary: Show information on specific user profile
+    put:
+      consumes:
+      - application/json
+      description: Update by json userPref
+      parameters:
+      - description: UserPref ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.UserPref'
+      summary: Update an userPref
+      tags:
+      - userPrefs
+  /api/v1/users:
+    get:
+      consumes:
+      - application/json
+      description: get all users
+      parameters:
+      - description: name search by q
+        in: query
+        name: q
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          headers:
+            Token:
+              description: qwerty
+              type: string
+          schema:
+            items:
+              $ref: '#/definitions/models.User'
+            type: array
+      summary: List all Users
+  /api/v1/users/{id}:
+    get:
+      consumes:
+      - application/json
+      description: provides user information with preferences in models.UserPref and channels from models.Channel
+      operationId: get-string-by-int
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          headers:
+            Token:
+              description: qwerty
+              type: string
+          schema:
+            $ref: '#/definitions/models.User'
+      summary: Show information on specific user
+  /user/{userId}/channel/{id}:
+    get:
+      consumes:
+      - application/json
+      description: gets User ID and Channel ID and creates a new client connection
+      parameters:
+      - description: User ID
+        in: path
+        name: user_id
+        required: true
+        type: integer
+      - description: Channel ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses: {}
+      summary: Connects a user on a channel to the websocket circuit
 swagger: "2.0"

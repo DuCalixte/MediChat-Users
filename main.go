@@ -15,47 +15,27 @@ import (
   "log"
   "time"
   "net/http"
-  // "github.com/swaggo/gin-swagger"
   _ "github.com/swaggo/gin-swagger/example/basic/docs"
-  // "github.com/DuCalixte/MediChat-Users/helpers"
   "github.com/DuCalixte/MediChat-Users/models"
-    // _ "github.com/DuCalixte/MediChat-Users/models/users"
-  "github.com/DuCalixte/MediChat-Users/configs"
   "github.com/DuCalixte/MediChat-Users/router"
   "github.com/DuCalixte/MediChat-Users/utilSocket"
+  "github.com/DuCalixte/MediChat-Users/settings"
   "github.com/DuCalixte/MediChat-Users/notifier"
-  // "github.com/DuCalixte/MediChat-Users/hubsockets"
-  // "github.com/DuCalixte/MediChat-Users/configs/routes"
-
-  // "github.com/DuCalixte/MediChat-Users/configs"
-  // _ "github.com/DuCalixte/MediChat-Users/configs/config"
-  // "github.com/DuCalixte/MediChat-Users/configs"
 )
 
 func InitApp() {
-  configs.InitSettings()
+  settings.InitSettings()
   utilSocket.InitBus()
   InitDatabase()
-  InitWebSocket()
-  // helpers.InitSocket()
-  // router.InitWebServer()
-  //
   InitWebServer()
   notifier.InitNotifier()
-}
-
-func InitWebSocket() {
-  // hub := hubsockets.newHub()
-	// go hub.run()
-  // Allow collection of memory referenced by the caller by doing all work in
-  // new goroutines.
 }
 
 func InitWebServer() {
   routesInit := router.InitRoutes()
 	readTimeout := 60 * time.Second
 	writeTimeout := 60 * time.Second
-	endPoint := fmt.Sprintf(":%d", 8001)
+	endPoint := fmt.Sprintf(":%d", settings.ServerSetting.HttpPort)
 	maxHeaderBytes := 1 << 20
 
 	server := &http.Server{
@@ -78,11 +58,4 @@ func InitDatabase() {
 
 func main() {
   InitApp()
-  // db, err := LoadDatabase()
-  // log.Printf("Unable to connect to database with error: \nErr %v, \nDB %v", db, err)
-  // defer db.Close()
-  // if(!db.HasTable(&User{})){ createUserTable(db) }
-  // createUserTable(db)
-  // dropUserTable(db)
-  // defer db.Close()
 }
