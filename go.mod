@@ -15,8 +15,10 @@ require (
 	github.com/gin-gonic/gin v1.6.3
 	github.com/go-delve/delve v1.4.1 // indirect
 	github.com/go-ini/ini v1.57.0
+	github.com/go-openapi/runtime v0.19.19 // indirect
 	github.com/go-openapi/spec v0.19.8 // indirect
 	github.com/go-openapi/swag v0.19.9 // indirect
+	github.com/go-swagger/go-swagger v0.24.0 // indirect
 	github.com/google/uuid v1.1.1
 	github.com/gorilla/websocket v1.4.2
 	github.com/jinzhu/gorm v1.9.14
@@ -29,6 +31,7 @@ require (
 	github.com/satori/go.uuid v1.2.0
 	github.com/segmentio/ksuid v1.0.2
 	github.com/sony/sonyflake v1.0.0
+	github.com/spf13/afero v1.3.1 // indirect
 	github.com/swaggo/files v0.0.0-20190704085106-630677cd5c14 // indirect
 	github.com/swaggo/gin-swagger v1.2.0
 	github.com/swaggo/swag v1.6.7
@@ -37,9 +40,10 @@ require (
 	github.com/urfave/cli v1.22.4 // indirect
 	github.com/urfave/cli/v2 v2.2.0 // indirect
 	golang.org/x/crypto v0.0.0-20200622213623-75b288015ac9
-	golang.org/x/net v0.0.0-20200625001655-4c5254603344 // indirect
+	golang.org/x/net v0.0.0-20200707034311-ab3426394381 // indirect
+	golang.org/x/sys v0.0.0-20200625212154-ddb9806d33ae // indirect
 	golang.org/x/text v0.3.3 // indirect
-	golang.org/x/tools v0.0.0-20200626171337-aa94e735be7f // indirect
+	golang.org/x/tools v0.0.0-20200707134715-9e0a013e855f // indirect
 	gopkg.in/yaml.v2 v2.3.0
 	mvdan.cc/unparam v0.0.0-20200501210554-b37ab49443f7 // indirect
 )

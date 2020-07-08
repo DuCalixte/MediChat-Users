@@ -24,7 +24,8 @@ func InitRoutes() *gin.Engine {
 
   route.POST("/signin", api.Authenticate)
   route.POST("/signup", api.Authorize)
-	route.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+  url := ginSwagger.URL("http://localhost:8080/swagger/doc.json")
+	route.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, url))
 
 // TODO Use JWT
   apiv1.Use(middlewares.UseJWT())

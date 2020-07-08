@@ -5,7 +5,11 @@ services:
     build: .
     ports:
       - 8080:8080
+    expose:
+      - 8080
     restart: on-failure
+    env_file:
+      ".docker/.env"
     volumes:
       - api:/usr/src/app/
     depends_on:

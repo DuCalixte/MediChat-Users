@@ -1,10 +1,11 @@
 # Start from golang base image
 FROM golang:alpine as builder
 
-# ENV GO111MODULE=on
+ENV GO111MODULE=on
+ENV GOPATH=/go:/home/app:/app
 
 # Add Maintainer info
-LABEL maintainer="Steven Victor <chikodi543@gmail.com>"
+LABEL maintainer="Stanley Calixte <scalixte@gmail.com>"
 
 # Install git.
 # Git is required for fetching the dependencies.
@@ -39,11 +40,8 @@ COPY --from=builder /app/.docker/.env .
 COPY --from=builder /app/.docker/app.ini .
 
 # Expose port 8080 to the outside world
-EXPOSE 8080
+# EXPOSE 8080
 
-# RUN echo $(ls -la)
-# RUN echo $(ls ./settings)
-# RUN echo $(pwd)
 
-#Command to run the executable
+# Command to run the executable
 CMD ["./main"]
