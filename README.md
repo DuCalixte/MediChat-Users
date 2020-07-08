@@ -1,6 +1,6 @@
 # MediChat-Users
 
-MediChat-Users is the Backend component of a Chat Provider application that also includes a SPA [MediChat-UI]() written in React with NodeJS and Fastify.
+MediChat-Users is the Backend component of a Chat Provider application that also includes a SPA [MediChat-UI](https://github.com/DuCalixte/MediChat-UI) written in React with NodeJS and Fastify.
 
 This application is written in go.
 
@@ -14,11 +14,12 @@ It provides the resources necessary to allow user access to the application. The
 - Swagger to get more information about the available resources.
 
 
-Future Features:
+Futur Features:
 
 - Ability to add and delete Channel resources
 - Ability to update Channel and User resources
 - Fix issue with websocket causing channel pollution in the UI
 - Adding a video feature with webrtc.
+- Add Redis for caching and websocket message storage
 
 See [CONTRIBUTING](CONTRIBUTING.md) for more on how to use the application
