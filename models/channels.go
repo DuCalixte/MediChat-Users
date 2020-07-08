@@ -14,7 +14,6 @@ type Channel struct {
 	Description  string 	`json:"description" gorm:"type:varchar(512)"`
 	IsPrivate    bool   	`json:"isPrivate" gorm:"default:true"`
 	IsAChatBot	 bool			`json:"chatBot" gorm:"default:false"`
-	// WebSocket		 string		`json:"websocket"  gorm:"type:varchar(256)"`
 	Users				[]*User		`json:"users" gorm:"PRELOAD:true;many2many:user_channels;"`
 }
 
